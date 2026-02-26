@@ -1,0 +1,111 @@
+
+
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Esercizio 7</title>
+
+<style>
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-color:#88f288;
+    text-align: center;
+    padding:20px;
+}
+
+.container{
+    background: rgb(165, 2, 2);
+    color:black;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+input{
+    width: 30%;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.button {
+    background-color: #aa0486;
+    border: none;
+    color: rgb(30, 236, 236);
+    padding: 15px 32px;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.button2:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.6);
+}
+</style>
+</head>
+
+<body>
+
+<h1>Generatore di frasi casuali (1 parte)</h1>
+
+<div class="container">
+
+<input type="text" id="soggetto" placeholder="Inserisci Soggetto">
+<input type="text" id="verbo" placeholder="Inserisci Verbo">
+
+<br><br>
+
+<button class="button button2" onclick="aggiungi()">Aggiungi alla lista</button>
+
+<h3>Liste inserite</h3>
+<ul id="listaSoggetti"></ul>
+<ul id="listaVerbi"></ul>
+
+<button class="button button2" onclick="GeneraFrasi()">Mescola e genera frasi</button>
+
+<div class="frasi" id="output"></div>
+
+</div>
+
+<script>
+
+let soggetti = ["Belmonte","Prof","La maestra","La bidella","Trump","Il cane"];
+let verbi = ["mangia","costruisce","sbadiglia","disegna","studia"];
+
+function aggiungi(){
+    let soggetto = document.getElementById("soggetto").value;
+    let verbo = document.getElementById("verbo").value;
+
+    if(soggetto === "" || verbo === ""){
+        alert("Inserisci sia soggetto che verbo!");
+        return;
+    }
+
+    soggetti.push(soggetto);
+    verbi.push(verbo);
+
+    document.getElementById("listaSoggetti").innerHTML += "<li>Soggetto: " + soggetto + "</li>";
+    document.getElementById("listaVerbi").innerHTML += "<li>Verbo: " + verbo + "</li>";
+
+    document.getElementById("soggetto").value = "";
+    document.getElementById("verbo").value = "";
+}
+
+function GeneraFrasi(){
+    let output = document.getElementById("output");
+    output.innerHTML = "";
+
+    for(let i = 0; i < 5; i++){
+        let sogg = soggetti[Math.floor(Math.random() * soggetti.length)];
+        let verb = verbi[Math.floor(Math.random() * verbi.length)];
+        output.innerHTML += "<p>" + sogg + " " + verb + "</p>";
+    }
+}
+
+</script>
+
+</body>
+</html>
